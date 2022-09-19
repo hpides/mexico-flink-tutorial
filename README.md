@@ -17,7 +17,7 @@ sudo snap install intellij-idea-community --classic
 
 Clone the repository:
 ```bash
-git clone git@github.com:hpides/fonda-flink-tutorial.git
+git clone git@github.com:hpides/mexico-flink-tutorial.git
 ```
 
 If you are using eclipse, you may have to run the following command:
