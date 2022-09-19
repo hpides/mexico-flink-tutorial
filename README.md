@@ -27,7 +27,7 @@ mvn eclipse:eclipse
 
 Download the exercises' statements:
 ```bash
-https://docs.google.com/document/d/1CI85yxDYOM8ZKIbV7fnYE4tcO9mYiTQbvAMOBwXadEY/edit?usp=sharing
+https://docs.google.com/document/d/1ASvLi02z2IU682-vbLs65EC_xPuQh4R0/edit?usp=sharing&ouid=116798794502395254892&rtpof=true&sd=true
 ```
 
 
