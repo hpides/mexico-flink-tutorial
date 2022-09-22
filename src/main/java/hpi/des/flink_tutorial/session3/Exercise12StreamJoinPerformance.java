@@ -29,7 +29,7 @@ for more details
 (https://nightlies.apache.org/flink/flink-docs-release-1.12/deployment/resource-providers/standalone/#example-standalone-ha-cluster-with-2-jobmanagers).
 */
 
-public class StreamJoinPerformance {
+public class Exercise12StreamJoinPerformance {
 
     public static void main(String[] args) throws Exception {
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
