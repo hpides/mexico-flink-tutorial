@@ -41,7 +41,7 @@ public class TestSession2 extends TestCase {
 
             Tuple5<Integer, LocalDateTime, Integer, LocalDateTime, Double> event = new Tuple5<>(42, this.dateTime1, 13, this.dateTime2, 0.5);
             int result = keySelector.getKey(event);
-            assertEquals(result, 42);
+            assertEquals(42, result);
 
         }
         catch (Exception e){
@@ -64,10 +64,10 @@ public class TestSession2 extends TestCase {
 
             Collection<TimeWindow> window1 = assigner.assignWindows(2, 1, ctx);
 
-            assertEquals(window1.size(), 1);
+            assertEquals(1, window1.size());
             TimeWindow w = window1.iterator().next();
-            assertEquals(w.getStart(), 0);
-            assertEquals(w.getEnd(), Time.hours(1).toMilliseconds());
+            assertEquals(0, w.getStart());
+            assertEquals(Time.hours(1).toMilliseconds(), w.getEnd());
 
         }
         catch (Exception e){
@@ -96,10 +96,10 @@ public class TestSession2 extends TestCase {
             ListCollector<Tuple4<Integer, Double, Double, LocalDateTime>> collector = new ListCollector<>(out);
 
             applyFunction.apply(42, window, events, collector) ;
-            assertEquals(out.size(), 1);
-            assertSame(out.get(0).f0, 42);
-            assertEquals(out.get(0).f1, 2.5);
-            assertEquals(out.get(0).f2, 5.);
+            assertEquals(1, out.size());
+            assertSame(42, out.get(0).f0);
+            assertEquals(2.5, out.get(0).f1);
+            assertEquals(5., out.get(0).f2);
             assertTrue(out.get(0).f3.isEqual(DateParser.millisecondsToLocalDateTime(0)));
 
         }
@@ -116,7 +116,7 @@ public class TestSession2 extends TestCase {
 
             Tuple4<Integer, Double, Double, LocalDateTime> event = new Tuple4<>(42, 2.5, 5., dateTime1);
             int result = keySelector.getKey(event);
-            assertEquals(result, 42);
+            assertEquals(42, result);
 
         }
         catch (Exception e){
@@ -139,10 +139,10 @@ public class TestSession2 extends TestCase {
 
             Collection<TimeWindow> window1 = assigner.assignWindows(2, 1, ctx);
 
-            assertEquals(window1.size(), 1);
+            assertEquals(1, window1.size());
             TimeWindow w = window1.iterator().next();
-            assertEquals(w.getStart(), 0);
-            assertEquals(w.getEnd(), Time.hours(24).toMilliseconds());
+            assertEquals(0, w.getStart());
+            assertEquals(Time.hours(24).toMilliseconds(), w.getEnd());
 
         }
         catch (Exception e){
@@ -163,9 +163,9 @@ public class TestSession2 extends TestCase {
             Tuple4<Integer, Double, Double, LocalDateTime> reduce = reduceFunction.reduce(event1, event2); // 42, 3., 15., this.dateTime2
             Tuple4<Integer, Double, Double, LocalDateTime> result = reduceFunction.reduce(reduce, event3); // 42, 3., 17., this.dateTime2
 
-            assertSame(result.f0, 42);
-            assertEquals(result.f1, 3.);
-            assertEquals(result.f2, 17.);
+            assertSame(42, result.f0);
+            assertEquals(3., result.f1);
+            assertEquals(17., result.f2);
             assertTrue(result.f3.isEqual(this.dateTime2));
 
         }
@@ -189,10 +189,10 @@ public class TestSession2 extends TestCase {
 
             Collection<TimeWindow> window1 = assigner.assignWindows(2, 1, ctx);
 
-            assertEquals(window1.size(), 1);
+            assertEquals(1, window1.size());
             TimeWindow w = window1.iterator().next();
-            assertEquals(w.getStart(), 0);
-            assertEquals(w.getEnd(), Time.hours(24).toMilliseconds());
+            assertEquals(0, w.getStart());
+            assertEquals(Time.hours(24).toMilliseconds(), w.getEnd());
 
         }
         catch (Exception e){
@@ -223,9 +223,9 @@ public class TestSession2 extends TestCase {
 
             Tuple4<Integer, Double, Double, LocalDateTime> result = aggregateFunction.getResult(accumulator);
 
-            assertSame(result.f0, 42);
-            assertEquals(result.f1, 3.);
-            assertEquals(result.f2, 10.);
+            assertSame(42, result.f0);
+            assertEquals(3., result.f1);
+            assertEquals(10., result.f2);
             assertTrue(result.f3.isEqual(this.dateTime1));
 
         }

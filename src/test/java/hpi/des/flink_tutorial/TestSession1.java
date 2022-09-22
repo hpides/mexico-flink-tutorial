@@ -49,13 +49,13 @@ public class TestSession1 extends TestCase {
 
 
             Tuple7<LocalDateTime, LocalDateTime, Integer, Integer, Integer, Double, Double> result = operator.map(ride1);
-            assertEquals(result.f0, ride1.f1);
-            assertEquals(result.f1, ride1.f2);
-            assertEquals(result.f2, ride1.f3);
-            assertEquals(result.f3, ride1.f5);
-            assertEquals(result.f4, ride1.f9);
-            assertEquals(result.f5, ride1.f13);
-            assertEquals(result.f6, ride1.f16);
+            assertEquals(ride1.f1, result.f0);
+            assertEquals(ride1.f2, result.f1);
+            assertEquals(ride1.f3, result.f2);
+            assertEquals(ride1.f5, result.f3);
+            assertEquals(ride1.f9, result.f4);
+            assertEquals(ride1.f13, result.f5);
+            assertEquals(ride1.f16, result.f6);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -107,12 +107,12 @@ public class TestSession1 extends TestCase {
             operator.flatMap(ride5, collector);
             operator.flatMap(ride6, collector);
 
-            assertEquals(out.size(), 1);
+            assertEquals(1, out.size());
 
             for(int i = 0; i < 7; i++){
-                assertSame(out.get(0).getField(i), ride6.getField(i));
+                assertSame(ride6.getField(i), out.get(0).getField(i));
             }
-            assertEquals(out.get(0).f7, 0.5);
+            assertEquals(0.5, out.get(0).f7);
         }
         catch(Exception e){
             e.printStackTrace();
@@ -140,12 +140,12 @@ public class TestSession1 extends TestCase {
             operator.flatMap(ride3, collector);
             operator.flatMap(ride4, collector);
 
-            assertEquals(out.size(), 1);
+            assertEquals(1, out.size());
 
             for(int i = 0; i < 8; i++){
-                assertSame(out.get(0).getField(i), ride4.getField(i));
+                assertSame(ride4.getField(i), out.get(0).getField(i));
             }
-            assertEquals(out.get(0).f8, 0.5);
+            assertEquals(0.5, out.get(0).f8);
         }
         catch(Exception e){
             e.printStackTrace();
@@ -158,8 +158,8 @@ public class TestSession1 extends TestCase {
             SlidingProcessingTimeWindows windowAssigner = (SlidingProcessingTimeWindows)Exercise5WindowOperator.getWindow();
 
             assertFalse(windowAssigner.isEventTime());
-            assertEquals(windowAssigner.getSize(), Time.seconds(1).toMilliseconds());
-            assertEquals(windowAssigner.getSlide(), Time.milliseconds(200).toMilliseconds());
+            assertEquals(Time.seconds(1).toMilliseconds(), windowAssigner.getSize());
+            assertEquals(Time.milliseconds(200).toMilliseconds(), windowAssigner.getSlide());
         }
         catch(Exception e){
             e.printStackTrace();
@@ -194,8 +194,8 @@ public class TestSession1 extends TestCase {
 
             TimeWindow window = new TimeWindow(0, 2);
             operator.apply(window, rides, collector);
-            assertEquals(out.size(), 1);
-            assertEquals(out.get(0), 4.);
+            assertEquals(1, out.size());
+            assertEquals(4., out.get(0));
         }
         catch(Exception e){
             e.printStackTrace();

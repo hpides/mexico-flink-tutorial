@@ -20,7 +20,7 @@ public class TestSession3 extends TestCase {
             KeySelector<TaxiRide, Long> selector = (KeySelector<TaxiRide, Long>) new Exercise11WhereOperator();
             TaxiRide ride = new TaxiRide(42, false);
             long result = selector.getKey(ride);
-            assertEquals(result, 42);
+            assertEquals(42, result);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -33,7 +33,7 @@ public class TestSession3 extends TestCase {
             KeySelector<TaxiFare, Long> selector = (KeySelector<TaxiFare, Long>) new Exercise11EqualToOperator();
             TaxiFare fare = new TaxiFare(42);
             long result = selector.getKey(fare);
-            assertEquals(result, 42);
+            assertEquals(42, result);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -46,7 +46,7 @@ public class TestSession3 extends TestCase {
             TumblingProcessingTimeWindows assigner =
                     (TumblingProcessingTimeWindows) Exercise11WindowJoinOperator.getWindow();
 
-            assertEquals(assigner.getSize(), Time.seconds(1).toMilliseconds());
+            assertEquals(Time.seconds(1).toMilliseconds(), assigner.getSize());
         }
         catch (Exception e){
             e.printStackTrace();
@@ -63,11 +63,11 @@ public class TestSession3 extends TestCase {
 
             Tuple5<Long, Short, String, Float, Float> result = joinFunction.join(ride, fare);
 
-            assertSame(result.f0, 42L);
-            assertSame(result.f1, ride.passengerCnt);
-            assertSame(result.f2, fare.paymentType);
-            assertEquals(result.f3, fare.totalFare);
-            assertEquals(result.f4, fare.tip);
+            assertSame(42L, result.f0);
+            assertSame(ride.passengerCnt, result.f1);
+            assertSame(fare.paymentType, result.f2);
+            assertEquals(fare.totalFare, result.f3);
+            assertEquals(fare.tip, result.f4);
 
         }
         catch (Exception e){
