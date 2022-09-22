@@ -5,6 +5,14 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 import java.util.ArrayList;
 
+/*
+Session 0: Hello World!
+Install IntelliJ https://www.jetbrains.com/de-de/idea/download/#section=linux and download the tutorial repository with
+git clone git@github.com:hpides/mexico-flink-tutorial.git After that start IntelliJ and open the repository folder.
+Build the project, open the file src/main/java/hpi/des/flink_tutorial/session0/HelloWorld.java and run the main
+function.
+ */
+
 public class HelloWorld {
     public static void main(String[] args) throws Exception {
 
