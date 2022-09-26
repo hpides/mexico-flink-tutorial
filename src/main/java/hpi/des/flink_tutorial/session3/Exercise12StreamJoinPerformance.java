@@ -54,6 +54,7 @@ public class Exercise12StreamJoinPerformance {
                     }
                 })
                 .window(TumblingProcessingTimeWindows.of(Time.seconds(1)))
+                /* Uncomment these lines!
                 .apply(new JoinFunction<TaxiRide, TaxiFare, TupleExercise12>() {
                     @Override
                     public TupleExercise12 join(Tuple2<TaxiRide, Long> first, Tuple2<TaxiFare, Long> second) throws Exception {
@@ -70,7 +71,7 @@ public class Exercise12StreamJoinPerformance {
                     }
                 })
                 // rideStream.print();
-                .addSink(sink);
+                .addSink(sink)*/;
 
         env.execute("Exercise Session 3b");
     }

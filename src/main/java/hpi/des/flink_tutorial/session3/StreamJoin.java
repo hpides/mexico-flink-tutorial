@@ -30,7 +30,7 @@ public class StreamJoin {
     public static void main(String[] args) throws Exception {
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
-        final StreamingFileSink<TupleExercise11> sink = StreamingFileSinkFactory.newSink("/tmp/output_session_3a");
+        //final StreamingFileSink<TupleExercise11> sink = StreamingFileSinkFactory.newSink("/tmp/output_session_3a"); // Uncomment!
 
         env.setParallelism(4);
 
@@ -38,7 +38,7 @@ public class StreamJoin {
         DataStream<TaxiFare> fareStream = env.addSource(new TaxiFareGeneratorProcTime());
 
         // rideStream.print();
-        rideStream.addSink(sink);
+        //rideStream.addSink(sink); // Uncomment!
 
         env.execute("Exercise Session 3a");
     }
