@@ -25,5 +25,5 @@ public class TupleExercise1 extends Tuple7<LocalDateTime, LocalDateTime, Integer
     public Integer ratecodeID() {return this.f3;}
     public Integer payment_type() {return this.f4;}
     public Double Tip_amount() {return this.f5;}
-    public Double Tolls_amount() {return this.f6;}
+    public Double Total_amount() {return this.f6;}
 }

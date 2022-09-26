@@ -18,7 +18,6 @@ more specific option for processing data from a window, instead of the apply ope
 // implement here the class of your operator. For window operators, you must modify the method getWindow and use it
 // in your stream processing job.
 public class Exercise5WindowOperator {
-
     public static WindowAssigner<Object, TimeWindow> getWindow(){
         // Add your code here
         return null;
