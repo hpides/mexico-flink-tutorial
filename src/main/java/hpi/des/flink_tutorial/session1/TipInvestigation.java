@@ -14,7 +14,7 @@ In this session, our objective is to analyze the tips given to taxi drivers in N
 o The code relative to this session is located at hpi.des.flink_tutorial.session1.TipInvestigation
 o Use the data dictionary located at hpi.des.flink_tutorial.resources.data_dict.txt to have an overview of the input
   data
-o Also use the tuples that we prepared for you in hpi.des.flink_tutorial.resources
+o Also use the tuples that we prepared for you in hpi.des.flink_tutorial.util.datatypes
 o You can use the method print() to debug your application
   (https://ci.apache.org/projects/flink/flink-docs-stable/dev/datastream_api.html#data-sinks)
 o In this session, we are using processing time

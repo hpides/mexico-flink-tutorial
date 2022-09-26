@@ -12,7 +12,9 @@ Tip 10) The operator windowAll
 (https://nightlies.apache.org/flink/flink-docs-release-1.12/dev/stream/operators/#windowall) is capable of windowing
 data streams from all partitions. The unit tests expect you to use an aggregation function instead of the apply function
 that we have been using so far
-(https://nightlies.apache.org/flink/flink-docs-release-1.12/dev/stream/operators/#aggregations-on-windows).
+(https://nightlies.apache.org/flink/flink-docs-release-1.12/dev/stream/operators/#aggregations-on-windows). Use the
+“TumblingEventTimeWindows.of()” window operator function and the “Time” class to bound the data stream and the
+“AggregateFunction” operator to aggregate the results.
  */
 
 // implement here the class of your operator. For window operators, you must modify the method getWindow and use it

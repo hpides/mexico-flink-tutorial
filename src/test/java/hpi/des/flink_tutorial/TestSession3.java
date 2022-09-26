@@ -4,9 +4,9 @@ import hpi.des.flink_tutorial.session3.Exercise11EqualToOperator;
 import hpi.des.flink_tutorial.session3.Exercise11WhereOperator;
 import hpi.des.flink_tutorial.session3.Exercise11WindowJoinOperator;
 import hpi.des.flink_tutorial.session3.Exercise11WindowJoinProcessingOperator;
-import hpi.des.flink_tutorial.session3.generator.datatypes.TaxiFare;
-import hpi.des.flink_tutorial.session3.generator.datatypes.TaxiRide;
-import hpi.des.flink_tutorial.util.TupleExercise11;
+import hpi.des.flink_tutorial.util.datatypes.TaxiFareTuple;
+import hpi.des.flink_tutorial.util.datatypes.TaxiRideTuple;
+import hpi.des.flink_tutorial.util.datatypes.TupleExercise11;
 import junit.framework.TestCase;
 import org.apache.flink.api.common.functions.JoinFunction;
 import org.apache.flink.api.common.time.Time;
@@ -16,10 +16,10 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTime
 
 public class TestSession3 extends TestCase {
 
-    public void testExercise11Where() {
+    public void testExercise11KeyByTaxiRide() {
         try {
-            KeySelector<TaxiRide, Long> selector = (KeySelector<TaxiRide, Long>) new Exercise11WhereOperator();
-            TaxiRide ride = new TaxiRide(42, false);
+            KeySelector<TaxiRideTuple, Long> selector = (KeySelector<TaxiRideTuple, Long>) new Exercise11WhereOperator();
+            TaxiRideTuple ride = new TaxiRideTuple(42, false);
             long result = selector.getKey(ride);
             assertEquals(result, 42);
         }
@@ -29,10 +29,10 @@ public class TestSession3 extends TestCase {
         }
     }
 
-    public void testExercise11EqualTo() {
+    public void testExercise11KeyByTaxiFare() {
         try {
-            KeySelector<TaxiFare, Long> selector = (KeySelector<TaxiFare, Long>) new Exercise11EqualToOperator();
-            TaxiFare fare = new TaxiFare(42);
+            KeySelector<TaxiFareTuple, Long> selector = (KeySelector<TaxiFareTuple, Long>) new Exercise11EqualToOperator();
+            TaxiFareTuple fare = new TaxiFareTuple(42);
             long result = selector.getKey(fare);
             assertEquals(result, 42);
         }
@@ -42,7 +42,7 @@ public class TestSession3 extends TestCase {
         }
     }
 
-    public void testExercise11WindoJoinOperator() {
+    public void testExercise11WindowJoinOperator() {
         try {
             TumblingProcessingTimeWindows assigner =
                     (TumblingProcessingTimeWindows) Exercise11WindowJoinOperator.getWindow();
@@ -55,17 +55,17 @@ public class TestSession3 extends TestCase {
         }
     }
 
-    public void testExercise11WindoJoinProcessingOperator() {
+    public void testExercise11WindowJoinProcessingOperator() {
         try {
-            JoinFunction<TaxiRide, TaxiFare, TupleExercise11> joinFunction =
-                    (JoinFunction<TaxiRide, TaxiFare, TupleExercise11>) new Exercise11WindowJoinProcessingOperator();
-            TaxiRide ride = new TaxiRide(42, false);
-            TaxiFare fare = new TaxiFare(42);
+            JoinFunction<TaxiRideTuple, TaxiFareTuple, TupleExercise11> joinFunction =
+                    (JoinFunction<TaxiRideTuple, TaxiFareTuple, TupleExercise11>) new Exercise11WindowJoinProcessingOperator();
+            TaxiRideTuple ride = new TaxiRideTuple(42, false);
+            TaxiFareTuple fare = new TaxiFareTuple(42);
 
-            Tuple5<Long, Short, String, Float, Float> result = joinFunction.join(ride, fare);
+            Tuple5<Long, Integer, String, Float, Float> result = joinFunction.join(ride, fare);
 
             assertSame(result.f0, 42L);
-            assertSame(result.f1, ride.passengerCnt);
+            assertSame(result.f1, ride.f3);
             assertSame(result.f2, fare.paymentType);
             assertEquals(result.f3, fare.totalFare);
             assertEquals(result.f4, fare.tip);

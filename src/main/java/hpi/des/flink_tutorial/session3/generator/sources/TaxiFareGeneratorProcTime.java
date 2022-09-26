@@ -18,9 +18,8 @@
 
 package hpi.des.flink_tutorial.session3.generator.sources;
 
-import hpi.des.flink_tutorial.session3.generator.datatypes.TaxiFare;
+import hpi.des.flink_tutorial.util.datatypes.TaxiFareTuple;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
-import org.apache.flink.streaming.api.watermark.Watermark;
 
 /**
  * This SourceFunction generates a data stream of TaxiFare records that include event time
@@ -29,17 +28,17 @@ import org.apache.flink.streaming.api.watermark.Watermark;
  * <p>The stream is generated in order, and it includes Watermarks.
  *
  */
-public class TaxiFareGeneratorProcTime implements SourceFunction<TaxiFare> {
+public class TaxiFareGeneratorProcTime implements SourceFunction<TaxiFareTuple> {
 
 	private volatile boolean running = true;
 
 	@Override
-	public void run(SourceContext<TaxiFare> ctx) throws Exception {
+	public void run(SourceContext<TaxiFareTuple> ctx) throws Exception {
 
 		long id = 1;
 
 		while (running) {
-			TaxiFare fare = new TaxiFare(id);
+			TaxiFareTuple fare = new TaxiFareTuple(id);
 			id += 1;
 
 			ctx.collect(fare);

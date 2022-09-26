@@ -1,4 +1,4 @@
-package hpi.des.flink_tutorial.util;
+package hpi.des.flink_tutorial.util.datatypes;
 
 import org.apache.flink.api.java.tuple.Tuple7;
 
@@ -14,9 +14,9 @@ public class TupleExercise1 extends Tuple7<LocalDateTime, LocalDateTime, Integer
 
     public TupleExercise1(LocalDateTime tpep_pickup_datetime, LocalDateTime tpep_dropoff_datetime,
                           Integer passenger_count, Integer ratecodeID, Integer payment_type, Double Tip_amount,
-                          Double Tolls_amount){
+                          Double Total_amount){
         super(tpep_pickup_datetime, tpep_dropoff_datetime, passenger_count, ratecodeID, payment_type, Tip_amount,
-                Tolls_amount);
+                Total_amount);
     }
 
     public LocalDateTime tpep_pickup_datetime() {return this.f0;}

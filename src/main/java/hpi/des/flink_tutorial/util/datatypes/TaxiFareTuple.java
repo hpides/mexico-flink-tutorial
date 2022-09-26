@@ -16,12 +16,13 @@
  * limitations under the License.
  */
 
-package hpi.des.flink_tutorial.session3.generator.datatypes;
+package hpi.des.flink_tutorial.util.datatypes;
 
 import hpi.des.flink_tutorial.session3.generator.utils.DataGenerator;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 /**
  * A TaxiFare has payment information about a taxi ride.
@@ -38,19 +39,19 @@ import java.time.Instant;
  * - the tolls
  * - the totalFare
  */
-public class TaxiFare implements Serializable {
+public class TaxiFareTuple implements Serializable {
 
 	/**
 	 * Creates a TaxiFare with now as the start time.
 	 */
-	public TaxiFare() {
-		this.startTime = Instant.now();
+	public TaxiFareTuple() {
+		this.startTime = LocalDateTime.now();
 	}
 
 	/**
 	 * Invents a TaxiFare.
 	 */
-	public TaxiFare(long rideId) {
+	public TaxiFareTuple(long rideId) {
 		DataGenerator g = new DataGenerator(rideId);
 
 		this.rideId = rideId;
@@ -66,7 +67,7 @@ public class TaxiFare implements Serializable {
 	/**
 	 * Creates a TaxiFare with the given parameters.
 	 */
-	public TaxiFare(long rideId, long taxiId, long driverId, Instant startTime, String paymentType, float tip, float tolls, float totalFare) {
+	public TaxiFareTuple(long rideId, long taxiId, long driverId, LocalDateTime startTime, String paymentType, float tip, float tolls, float totalFare) {
 		this.rideId = rideId;
 		this.taxiId = taxiId;
 		this.driverId = driverId;
@@ -77,10 +78,19 @@ public class TaxiFare implements Serializable {
 		this.totalFare = totalFare;
 	}
 
+	public long rideId() {return rideId;}
+	public long taxiId() {return taxiId;}
+	public long driverId() {return driverId;}
+	public LocalDateTime startTime() {return startTime;}
+	public String paymentType() {return paymentType;}
+	public float tip() {return tip;}
+	public float tolls() {return tolls;}
+	public float totalFare() {return totalFare;}
+
 	public long rideId;
 	public long taxiId;
 	public long driverId;
-	public Instant startTime;
+	public LocalDateTime startTime;
 	public String paymentType;
 	public float tip;
 	public float tolls;
@@ -101,8 +111,8 @@ public class TaxiFare implements Serializable {
 
 	@Override
 	public boolean equals(Object other) {
-		return other instanceof TaxiFare &&
-				this.rideId == ((TaxiFare) other).rideId;
+		return other instanceof TaxiFareTuple &&
+				this.rideId == ((TaxiFareTuple) other).rideId;
 	}
 
 	@Override
@@ -114,7 +124,7 @@ public class TaxiFare implements Serializable {
 	 * Gets the fare's start time.
 	 */
 	public long getEventTime() {
-		return startTime.toEpochMilli();
+		return startTime.toEpochSecond(ZoneOffset.UTC);
 	}
 
 }

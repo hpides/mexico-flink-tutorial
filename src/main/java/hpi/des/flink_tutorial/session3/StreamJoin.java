@@ -1,14 +1,11 @@
 package hpi.des.flink_tutorial.session3;
 
-import hpi.des.flink_tutorial.session3.generator.datatypes.TaxiFare;
-import hpi.des.flink_tutorial.session3.generator.datatypes.TaxiRide;
+import hpi.des.flink_tutorial.util.datatypes.TaxiFareTuple;
+import hpi.des.flink_tutorial.util.datatypes.TaxiRideTuple;
 import hpi.des.flink_tutorial.session3.generator.sources.TaxiFareGeneratorProcTime;
 import hpi.des.flink_tutorial.session3.generator.sources.TaxiRideGeneratorProcTime;
-import hpi.des.flink_tutorial.util.StreamingFileSinkFactory;
-import hpi.des.flink_tutorial.util.TupleExercise11;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.sink.filesystem.StreamingFileSink;
 
 /*
 Session 3: Joins and analysis of a Flink job performance
@@ -34,11 +31,20 @@ public class StreamJoin {
 
         env.setParallelism(4);
 
-        DataStream<TaxiRide> rideStream = env.addSource(new TaxiRideGeneratorProcTime());
-        DataStream<TaxiFare> fareStream = env.addSource(new TaxiFareGeneratorProcTime());
+        DataStream<TaxiRideTuple> rideStream = env.addSource(new TaxiRideGeneratorProcTime());
+        DataStream<TaxiFareTuple> fareStream = env.addSource(new TaxiFareGeneratorProcTime());
 
-        // rideStream.print();
-        //rideStream.addSink(sink); // Uncomment!
+        //rideStream.print();
+        /* Uncomment these lines!
+        rideStream
+                // Exercise 11: joining TaxiRide and TaxiFare streams
+                .join(fareStream)
+                .where(new Exercise11WhereOperator())
+                .equalTo(new Exercise11EqualToOperator())
+                .window(Exercise11WindowJoinOperator.getWindow())
+                .apply(new Exercise11WindowJoinProcessingOperator())
+
+                .addSink(sink); */
 
         env.execute("Exercise Session 3a");
     }

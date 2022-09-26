@@ -8,7 +8,9 @@ day (24h) per pick-up location. You should keep the time of the best average in 
 Tip 9) The operator reduce can be an efficient alternative to using apply to process incremental windows
 (https://nightlies.apache.org/flink/flink-docs-release-1.12/dev/stream/operators/#reduce). The method keyBy is capable
 of partitioning a stream based on a key
-(https://nightlies.apache.org/flink/flink-docs-release-1.12/dev/stream/operators/#keyby)
+(https://nightlies.apache.org/flink/flink-docs-release-1.12/dev/stream/operators/#keyby). Use the
+“TumblingEventTimeWindows.of()” window operator function and the “Time” class to bound the data stream Use the
+“ReduceFunction” to pick the best of to events.
  */
 
 public class Exercise9KeyByOperator {

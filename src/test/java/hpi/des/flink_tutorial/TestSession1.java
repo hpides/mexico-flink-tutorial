@@ -1,10 +1,10 @@
 package hpi.des.flink_tutorial;
 
 import hpi.des.flink_tutorial.session1.*;
-import hpi.des.flink_tutorial.util.TaxiRideTuple;
-import hpi.des.flink_tutorial.util.TupleExercise1;
-import hpi.des.flink_tutorial.util.TupleExercise3;
-import hpi.des.flink_tutorial.util.TupleExercise4;
+import hpi.des.flink_tutorial.util.datatypes.TaxiRideTuple;
+import hpi.des.flink_tutorial.util.datatypes.TupleExercise1;
+import hpi.des.flink_tutorial.util.datatypes.TupleExercise3;
+import hpi.des.flink_tutorial.util.datatypes.TupleExercise4;
 import junit.framework.TestCase;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.FlatMapFunction;

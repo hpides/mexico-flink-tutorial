@@ -1,8 +1,8 @@
 package hpi.des.flink_tutorial;
 import hpi.des.flink_tutorial.session2.*;
 import hpi.des.flink_tutorial.util.DateParser;
-import hpi.des.flink_tutorial.util.TupleExercise7;
-import hpi.des.flink_tutorial.util.TupleExercise8a9a10;
+import hpi.des.flink_tutorial.util.datatypes.TupleExercise7;
+import hpi.des.flink_tutorial.util.datatypes.TupleExercise8a9a10;
 import junit.framework.TestCase;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.functions.ReduceFunction;

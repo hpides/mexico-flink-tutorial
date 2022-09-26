@@ -1,7 +1,7 @@
 package hpi.des.flink_tutorial.session2;
 
-import hpi.des.flink_tutorial.util.TaxiRideTuple;
-import hpi.des.flink_tutorial.util.TupleExercise7;
+import hpi.des.flink_tutorial.util.datatypes.TaxiRideTuple;
+import hpi.des.flink_tutorial.util.datatypes.TupleExercise7;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.util.Collector;
 

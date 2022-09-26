@@ -12,7 +12,9 @@ Tip 11) The operator join allows joining two streams using different strategies 
 (https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/dev/datastream/operators/overview/#window-join,
 https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/dev/datastream/operators/joining/). The addSink operator
 adds a sink to the job
-(https://nightlies.apache.org/flink/flink-docs-release-1.12/dev/connectors/streamfile_sink.html).
+(https://nightlies.apache.org/flink/flink-docs-release-1.12/dev/connectors/streamfile_sink.html). Use the
+“TumblingEventTimeWindows.of()” window operator function and the “Time” class to bound the data stream. Use the
+“JoinFunction” operator to join streams.
  */
 
 public class Exercise11EqualToOperator {

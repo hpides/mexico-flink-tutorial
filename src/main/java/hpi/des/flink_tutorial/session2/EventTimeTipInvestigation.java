@@ -2,7 +2,7 @@ package hpi.des.flink_tutorial.session2;
 
 import hpi.des.flink_tutorial.session1.TransformSourceStreamOperator;
 import hpi.des.flink_tutorial.util.InputFile;
-import hpi.des.flink_tutorial.util.TaxiRideTuple;
+import hpi.des.flink_tutorial.util.datatypes.TaxiRideTuple;
 import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -37,7 +37,9 @@ Tip 6) Have a look on how Flink deals with event time stream processing
 responsible for defining how to extract timestamps and the frequency that watermarks are emitted
 (https://nightlies.apache.org/flink/flink-docs-release-1.12/dev/event_timestamps_watermarks.html#introduction-to-watermark-strategies).
 Use the method localDateTimeToMilliseconds available in hpi.des.flink_tutorial.util.DateParser to convert from
-LocalDateTime to milliseconds.
+LocalDateTime to milliseconds. Use the “millisecondsToLocalDateTime” method available at
+hpi.des.flink_tutorial.util.DateParser to transform a “LocalDateTime” to a timestamp in “long” format. Also have a
+look at the output types of the functions.
  */
 
     public static Duration exercise6WatermarkInterval(long durationInMinutes){
@@ -62,7 +64,7 @@ LocalDateTime to milliseconds.
                 .assignTimestampsAndWatermarks(watermarkStrategy);
 
         taxiRideStream
-                .flatMap(new PreprocessStream())
+                .flatMap(new PreprocessStream()) //.keyBy(...).window(...).apply(...) etc.
                 // exercise 7
                 // exercise 8
                 // exercise 9

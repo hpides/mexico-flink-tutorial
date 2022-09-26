@@ -1,4 +1,4 @@
-package hpi.des.flink_tutorial.util;
+package hpi.des.flink_tutorial.util.datatypes;
 
 import org.apache.flink.api.java.tuple.Tuple4;
 

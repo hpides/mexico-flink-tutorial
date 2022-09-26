@@ -12,7 +12,8 @@ Tip 5) The windowAll operator performs window processing on non partitioned data
 (https://nightlies.apache.org/flink/flink-docs-release-1.12/dev/stream/operators/#windowall). The apply operator process
 data from a window (https://nightlies.apache.org/flink/flink-docs-release-1.12/dev/stream/operators/#window-apply). A
 more specific option for processing data from a window, instead of the apply operator, are aggregation operators
-(https://nightlies.apache.org/flink/flink-docs-release-1.12/dev/stream/operators/#aggregations-on-windows).
+(https://nightlies.apache.org/flink/flink-docs-release-1.12/dev/stream/operators/#aggregations-on-windows). Use the
+“SlidingProcessingTimeWindows.of()” window operator function and the “Time” class to bound the data stream.
  */
 
 // implement here the class of your operator. For window operators, you must modify the method getWindow and use it

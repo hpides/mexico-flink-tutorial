@@ -18,7 +18,7 @@
 
 package hpi.des.flink_tutorial.session3.generator.sources;
 
-import hpi.des.flink_tutorial.session3.generator.datatypes.TaxiRide;
+import hpi.des.flink_tutorial.util.datatypes.TaxiRideTuple;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 
 /**
@@ -28,18 +28,18 @@ import org.apache.flink.streaming.api.functions.source.SourceFunction;
  * <p>The stream is produced out-of-order, and includes Watermarks (with no late events).
  *
  */
-public class TaxiRideGeneratorProcTime implements SourceFunction<TaxiRide> {
+public class TaxiRideGeneratorProcTime implements SourceFunction<TaxiRideTuple> {
 
 	public static final int SLEEP_MILLIS_PER_EVENT = 10;
 	private volatile boolean running = true;
 
 	@Override
-	public void run(SourceContext<TaxiRide> ctx) throws Exception {
+	public void run(SourceContext<TaxiRideTuple> ctx) throws Exception {
 
 		long id = 1;
 
 		while (running) {
-			TaxiRide ride = new TaxiRide(id, false);
+			TaxiRideTuple ride = new TaxiRideTuple(id, false);
 			ctx.collect(ride);
 			Thread.sleep(SLEEP_MILLIS_PER_EVENT);
 			id++;

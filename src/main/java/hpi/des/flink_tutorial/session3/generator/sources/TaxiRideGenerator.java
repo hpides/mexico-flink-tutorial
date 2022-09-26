@@ -18,10 +18,11 @@
 
 package hpi.des.flink_tutorial.session3.generator.sources;
 
-import hpi.des.flink_tutorial.session3.generator.datatypes.TaxiRide;
+import hpi.des.flink_tutorial.util.datatypes.TaxiRideTuple;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.apache.flink.streaming.api.watermark.Watermark;
 
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -34,39 +35,39 @@ import java.util.Random;
  * <p>The stream is produced out-of-order, and includes Watermarks (with no late events).
  *
  */
-public class TaxiRideGenerator implements SourceFunction<TaxiRide> {
+public class TaxiRideGenerator implements SourceFunction<TaxiRideTuple> {
 
 	public static final int SLEEP_MILLIS_PER_EVENT = 10;
 	private static final int BATCH_SIZE = 5;
 	private volatile boolean running = true;
 
 	@Override
-	public void run(SourceContext<TaxiRide> ctx) throws Exception {
+	public void run(SourceContext<TaxiRideTuple> ctx) throws Exception {
 
-		PriorityQueue<TaxiRide> endEventQ = new PriorityQueue<>(100);
+		PriorityQueue<TaxiRideTuple> endEventQ = new PriorityQueue<>(100);
 		long id = 0;
 		long maxStartTime = 0;
 
 		while (running) {
 
 			// generate a batch of START events
-			List<TaxiRide> startEvents = new ArrayList<TaxiRide>(BATCH_SIZE);
+			List<TaxiRideTuple> startEvents = new ArrayList<TaxiRideTuple>(BATCH_SIZE);
 			for (int i = 1; i <= BATCH_SIZE; i++) {
-				TaxiRide ride = new TaxiRide(id + i, true);
+				TaxiRideTuple ride = new TaxiRideTuple(id + i, true);
 				startEvents.add(ride);
 				// the start times may be in order, but let's not assume that
-				maxStartTime = Math.max(maxStartTime, ride.startTime.toEpochMilli());
+				maxStartTime = Math.max(maxStartTime, ride.f1.toEpochSecond(ZoneOffset.UTC));
 			}
 
 			// enqueue the corresponding END events
 			for (int i = 1; i <= BATCH_SIZE; i++) {
-				endEventQ.add(new TaxiRide(id + i, false));
+				endEventQ.add(new TaxiRideTuple(id + i, false));
 			}
 
 			// release the END events coming before the end of this new batch
 			// (this allows a few END events to precede their matching START event)
 			while (endEventQ.peek().getEventTime() <= maxStartTime) {
-				TaxiRide ride = endEventQ.poll();
+				TaxiRideTuple ride = endEventQ.poll();
 				ctx.collectWithTimestamp(ride, ride.getEventTime());
 			}
 
