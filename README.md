@@ -29,7 +29,7 @@ brew install --cask intellij-idea-ce
 
 Windows users can download & install manually.
 - OpenJDK: [https://aka.ms/download-jdk/microsoft-jdk-11.0.16.1-windows-x64.msi](https://aka.ms/download-jdk/microsoft-jdk-11.0.16.1-windows-x64.msi)
-- IntelliJ: [https://www.jetbrains.com/de-de/idea/download/#section=linux](https://www.jetbrains.com/de-de/idea/download/#section=linux)
+- IntelliJ: [https://www.jetbrains.com/de-de/idea/download/#section=windows](https://www.jetbrains.com/de-de/idea/download/#section=windows)
 
 ## Tutorial
 
