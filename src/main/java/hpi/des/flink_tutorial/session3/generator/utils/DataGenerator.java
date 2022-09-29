@@ -18,8 +18,8 @@
 
 package hpi.des.flink_tutorial.session3.generator.utils;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Random;
 
 /**
@@ -33,7 +33,7 @@ public class DataGenerator {
 
 	private static final int SECONDS_BETWEEN_RIDES = 20;
 	private static final int NUMBER_OF_DRIVERS = 200;
-	private static final LocalDateTime beginTime = LocalDateTime.parse("2020-01-01T12:00:00.00");
+	private static final Long beginTime = LocalDateTime.parse("2020-01-01T12:00:00.00").toEpochSecond(ZoneOffset.UTC) * 1000;
 
 	private transient long rideId;
 
@@ -47,15 +47,15 @@ public class DataGenerator {
 	/**
 	 * Deterministically generates and returns the startTime for this ride.
 	 */
-	public LocalDateTime startTime() {
-		return beginTime.plusSeconds(SECONDS_BETWEEN_RIDES * rideId);
+	public long startTime() {
+		return beginTime + SECONDS_BETWEEN_RIDES * rideId;
 	}
 
 	/**
 	 * Deterministically generates and returns the endTime for this ride.
 	 */
-	public LocalDateTime endTime() {
-		return startTime().plusSeconds(60 * rideDurationMinutes());
+	public long endTime() {
+		return startTime() + 60 * rideDurationMinutes();
 	}
 
 	/**

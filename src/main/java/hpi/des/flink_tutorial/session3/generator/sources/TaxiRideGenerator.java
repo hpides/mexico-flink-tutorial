@@ -22,7 +22,6 @@ import hpi.des.flink_tutorial.util.datatypes.TaxiRideTuple;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.apache.flink.streaming.api.watermark.Watermark;
 
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -56,7 +55,7 @@ public class TaxiRideGenerator implements SourceFunction<TaxiRideTuple> {
 				TaxiRideTuple ride = new TaxiRideTuple(id + i, true);
 				startEvents.add(ride);
 				// the start times may be in order, but let's not assume that
-				maxStartTime = Math.max(maxStartTime, ride.f1.toEpochSecond(ZoneOffset.UTC));
+				maxStartTime = Math.max(maxStartTime, ride.f1);
 			}
 
 			// enqueue the corresponding END events

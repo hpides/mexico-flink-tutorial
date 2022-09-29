@@ -21,8 +21,6 @@ package hpi.des.flink_tutorial.util.datatypes;
 import hpi.des.flink_tutorial.session3.generator.utils.DataGenerator;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 
 /**
  * A TaxiFare has payment information about a taxi ride.
@@ -42,13 +40,6 @@ import java.time.ZoneOffset;
 public class TaxiFareTuple implements Serializable {
 
 	/**
-	 * Creates a TaxiFare with now as the start time.
-	 */
-	public TaxiFareTuple() {
-		this.startTime = LocalDateTime.now();
-	}
-
-	/**
 	 * Invents a TaxiFare.
 	 */
 	public TaxiFareTuple(long rideId) {
@@ -64,24 +55,10 @@ public class TaxiFareTuple implements Serializable {
 		this.totalFare = g.totalFare();
 	}
 
-	/**
-	 * Creates a TaxiFare with the given parameters.
-	 */
-	public TaxiFareTuple(long rideId, long taxiId, long driverId, LocalDateTime startTime, String paymentType, float tip, float tolls, float totalFare) {
-		this.rideId = rideId;
-		this.taxiId = taxiId;
-		this.driverId = driverId;
-		this.startTime = startTime;
-		this.paymentType = paymentType;
-		this.tip = tip;
-		this.tolls = tolls;
-		this.totalFare = totalFare;
-	}
-
 	public long rideId() {return rideId;}
 	public long taxiId() {return taxiId;}
 	public long driverId() {return driverId;}
-	public LocalDateTime startTime() {return startTime;}
+	public long startTime() {return startTime;}
 	public String paymentType() {return paymentType;}
 	public float tip() {return tip;}
 	public float tolls() {return tolls;}
@@ -90,7 +67,7 @@ public class TaxiFareTuple implements Serializable {
 	public long rideId;
 	public long taxiId;
 	public long driverId;
-	public LocalDateTime startTime;
+	public Long startTime;
 	public String paymentType;
 	public float tip;
 	public float tolls;
@@ -124,7 +101,7 @@ public class TaxiFareTuple implements Serializable {
 	 * Gets the fare's start time.
 	 */
 	public long getEventTime() {
-		return startTime.toEpochSecond(ZoneOffset.UTC);
+		return startTime;
 	}
 
 }
